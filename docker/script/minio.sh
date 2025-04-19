@@ -6,5 +6,5 @@ echo "MINIO_ROOT_PASSWORD: $MINIO_ROOT_PASSWORD"
 
 # Start MinIO with correct interface binding
 exec minio server /data \
-  --console-address ":9001" \
-  --address ":9000"
+  --console-address "0.0.0.0:9001" \
+  --address "0.0.0.0:9000"
