@@ -1,9 +1,11 @@
-# Use the official MinIO image as the base
 FROM minio/minio:latest
 
-# Expose MinIO default ports
+# Copy your startup script
+COPY docker/script/minio.sh /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
+
+# Expose the required ports
 EXPOSE 9000 9001
 
-# Command to start MinIO server
-# We use environment variables for MINIO_ROOT_USER and MINIO_ROOT_PASSWORD
-CMD ["server", "/data", "--console-address", ":9001", "--address", ":9000"]
+# Use your script as entrypoint
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]

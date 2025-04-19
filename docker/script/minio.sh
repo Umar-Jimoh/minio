@@ -1,10 +1,10 @@
 #!/bin/sh
 
-echo "Print env..."
-printenv PATH
-# Set default credentials if not provided
-export MINIO_ROOT_USER=${MINIO_ROOT_USER}
-export MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+# Print keys to confirm they're loaded (optional)
+echo "MINIO_ROOT_USER: $MINIO_ROOT_USER"
+echo "MINIO_ROOT_PASSWORD: $MINIO_ROOT_PASSWORD"
 
-# Start MinIO server
-exec minio server /data --address ":9000" --console-address ":9001"
+# Start MinIO with correct interface binding
+exec minio server /data \
+  --console-address ":9001" \
+  --address ":9000"
