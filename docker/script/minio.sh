@@ -7,4 +7,4 @@ echo "MINIO_ROOT_PASSWORD: $MINIO_ROOT_PASSWORD"
 # Start MinIO with correct interface binding
 exec minio server /data \
   --console-address "https://minio-q4xm.onrender.com:9001" \
-  --address "0.0.0.0https://minio-q4xm.onrender.com:9000"
+  --address "https://minio-q4xm.onrender.com:9000"
