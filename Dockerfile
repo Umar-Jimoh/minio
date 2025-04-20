@@ -1,11 +1,26 @@
-FROM minio/minio:latest
+# Use a lightweight image with MinIO + Nginx
+FROM ubuntu:22.04
 
-# # Copy your startup script
-# COPY docker/script/minio.sh /usr/bin/entrypoint.sh
-# RUN chmod +x /usr/bin/entrypoint.sh
+# Install required tools
+RUN apt-get update && \
+    apt-get install -y wget nginx curl unzip && \
+    wget https://dl.min.io/server/minio/release/linux-amd64/minio && \
+    chmod +x minio && \
+    mv minio /usr/local/bin/
 
-# Expose the required ports
-EXPOSE 9000
+# Create MinIO user
+RUN useradd -m minio
 
-# Use your script as entrypoint
-CMD ["server", "/data", "--address", ":9000"]
+# Set MinIO environment variables
+
+ENV MINIO_ROOT_USER=root
+ENV MINIO_ROOT_PASSWORD=umarroot
+
+# Copy Nginx config
+COPY nginx.conf /etc/nginx/sites-available/default
+
+# Expose HTTP port
+EXPOSE 10000
+
+# Start MinIO and Nginx together
+CMD sh -c "/usr/local/bin/minio server /data --console-address ':9000' & nginx -g 'daemon off;'"
