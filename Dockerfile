@@ -23,4 +23,4 @@ COPY nginx.conf /etc/nginx/sites-available/default
 EXPOSE 10000
 
 # Start MinIO and Nginx together
-CMD sh -c "/usr/local/bin/minio server /data --console-address ':9000' & nginx -g 'daemon off;'"
+CMD sh -c "/usr/local/bin/minio server /data --address ':9000' & nginx -g 'daemon off;'"
