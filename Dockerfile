@@ -8,4 +8,4 @@ FROM minio/minio:latest
 EXPOSE 9000
 
 # Use your script as entrypoint
-CMD ["server", "/data", "--address", ":9000", "--console-address", ":9001"]
+CMD ["server", "/data", "--address", ":9000"]
